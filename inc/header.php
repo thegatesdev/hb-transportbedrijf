@@ -9,7 +9,7 @@ include_once 'inc/config.php';
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Klantgegevens</title>
+        <title><?php $header_title ?></title>
         <!-- hier komen de css-bestanden -->
         <link rel="stylesheet" type="text/css" href="css/nav.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">

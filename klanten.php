@@ -1,5 +1,6 @@
 <?php
 // include header.php
+$header_title = "Klanten";
 include 'inc/header.php';
 // header tags toevoegen
 echo '<header class="head">';
