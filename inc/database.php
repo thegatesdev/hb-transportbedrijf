@@ -2,8 +2,8 @@
 //initialiseren
 define('HOST', 'localhost');
 define('DATABASE', 'transportbedrijf');
-define('USER', 'webuser');
-define('PASSWORD','7q06DXjDr1Z3reXK');
+define('USER', 'root');
+define('PASSWORD','');
 $dbconn='';
 //connectie maken
 try {
