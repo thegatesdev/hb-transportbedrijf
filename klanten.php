@@ -10,7 +10,7 @@ echo '</header>'; //afsluiten header
 echo '<main class="main-content">';
 ?>
 <!-- tabelkop met klantgegevens als HTML-->
-<table id="customers">
+<table id="maintable">
     <tr>
         <th>klantnr</th>
         <th>klantnaam</th>
