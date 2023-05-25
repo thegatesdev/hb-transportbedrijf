@@ -13,7 +13,7 @@ switch ($autRol){
                <ul>
                     <li><a href="#">Home</a></li>
                     <li><a href="klanten.php">Klantgegevens</a></li>
-                    <li><a href="#">Opdrachten</a></li>
+                    <li><a href="orders.php">Opdrachten</a></li>
                     <li>
                         <a href="#Beheer" class="dropbtn">Beheer</a>
                         <ul>
@@ -31,7 +31,7 @@ switch ($autRol){
                <ul>
                     <li><a href="#">Home</a></li>
                     <li><a href="klanten.php">Klantgegevens</a></li>
-                    <li><a href="#">Opdrachten</a></li>
+                    <li><a href="orders.php">Opdrachten</a></li>
                      <li><a href="#">Contact</a></li>
                     <li><a href="uitloggen.php">Uitloggen</a></li>
                 </ul>
@@ -42,7 +42,7 @@ switch ($autRol){
                <ul>
                     <li><a href="#">Home</a></li>
                     <li><a href="klanten.php">Klantgegevens</a></li>
-                    <li><a href="#">Opdrachten</a></li>
+                    <li><a href="orders.php">Opdrachten</a></li>
                     <li><a href="#">Contact</a></li>
                     <li><a href="uitloggen.php">Uitloggen</a></li>
                 </ul>
@@ -53,7 +53,7 @@ switch ($autRol){
                <ul>
                     <li><a href="#">Home</a></li>
                     <li><a href="klanten.php">Klantgegevens</a></li>
-                    <li><a href="#">Opdrachten</a></li>
+                    <li><a href="orders.php">Opdrachten</a></li>
                     <li><a href="#">Contact</a></li>
                     <li><a href="uitloggen.php">Uitloggen</a></li>
                 </ul>
