@@ -50,7 +50,7 @@ $query="SELECT id, datumopdr, klant_id, colli, kg,
         CONCAT(straat,' ', huisnummer, COALESCE(toevoeging, '')) as adres,
         postcode, plaats, datumplanning, datumtransport, bonbin, mdw, bedrag, notitie
         FROM opdracht
-        ORDER BY datumopdr DESC
+        ORDER BY datumopdr DESC, postcode
         LIMIT " .$start_from.",". RECORDS_PER_PAGE.";";
 //$resultaat bepalen....
 $result=mysqli_query($dbconn, $query);
