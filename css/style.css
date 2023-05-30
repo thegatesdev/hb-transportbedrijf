@@ -216,6 +216,10 @@ input[type=submit]:hover {
     /*TODO: icons verzamelen... */
     color: red;
 }
+.btn-order{
+    color: blue;
+    background: blue; /* Icons wilden niet werken */
+}
 /*Idem als login form, maar nu voor detail-forms...*/
 #frmDetail > * {
     margin: auto;
