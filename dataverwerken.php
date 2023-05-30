@@ -19,6 +19,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         case "InsertKlant":
             insertKlant();
             break;
+        case "InsertOpdracht":
+            insertOpdracht();
+            break;
         case "LEEG":
         default:
             echo "geen geldige actie...";
@@ -81,6 +84,41 @@ else {
             exit();
         }
 
+    }
+
+    function InsertOpdracht(){
+        global $dbconn;
+        $date = date("Y-m-d");
+        $klantid = getPostOr('klantid');
+        $colli = getPostOr('colli');
+        $gewicht = getPostOr('gewicht');
+        $adres = getPostOr('adres');
+        $postcode = getPostOr('postcode');
+        $plaats = getPostOr('plaats');
+        $datumplanning = getPostOr('datumplanning');
+        $datumtransport = getPostOr('datumtransport');
+        $bonbin = getPostOr('bonbin');
+        $mdw = getPostOr('mdw');
+        $bedrag = getPostOr('bedrag');
+        $notitie = getPostOr('notitie');
+
+        $queryInsertOpdracht = "INSERT INTO opdracht
+        (datumopdr, klant_id, colli, kg, straat, huisnummer, plaats, datumplanning, datumtransport, notitie, postcode, bonbin, mdw, bedrag)
+        values('{$date}', '{$klantid}', '{$colli}', '{$gewicht}', '{$adres}', 0,'{$plaats}','{$datumplanning}', '{$datumtransport}', '{$notitie}', '{$postcode}', '{$bonbin}', '{$mdw}', '{$bedrag}');";
+        if (mysqli_query($dbconn, $queryInsertOpdracht)){
+            echo "<p>Opdracht is toegevoegd</p><br>";
+            header('refresh: 1; url=opdrachten.php');
+            exit();
+        }
+        else {
+            echo "<p>Opdracht is NIET toegevoegd...</p><br>";
+            header('refresh: 10; url=klanten.php');
+            exit();
+        }
+    }
+
+    function getPostOr($id, $or = ''){
+        return addslashes($_POST[$id] ?? $or);
     }
 ?>
 

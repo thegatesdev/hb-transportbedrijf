@@ -5,7 +5,7 @@ include 'inc/header.php';
 // header tags toevoegen
 echo '<header class="head">';
 // hier komt straks een url om een nieuwe klant aan te maken…
-echo "<a href='order_new.php' class='btn-new'><i class='material-icons md-24'>new</i></a>";
+echo "<a href='order_new.php' class='btn-new'><i class='material-icons md-24'>add</i></a>";
 echo '</header>'; //afsluiten header
 // voor gridopmaak alvast de main-content
 echo '<main class="main-content">';
