@@ -30,12 +30,8 @@ echo '<main class="main-content">';
     </tr>
 <?php
 //bepaling 'page' voor paginering
-if (isset($_GET["page"])) {
-    $page = $_GET["page"];
-}
-else {
-    $page=1;
-}
+$page = $_GET["page"] ?? 1; 
+
 //start vanaf
 $start_from = ($page-1) * RECORDS_PER_PAGE;
 //aantal pagina's bepalen t.b.v. paginering
@@ -45,11 +41,18 @@ $row = mysqli_fetch_assoc($res_count);
 $total_rows = $row['aantal'];
 $total_pages = ceil($total_rows / RECORDS_PER_PAGE);
 
+//bepalen orders per klant
+if (isset($_GET['klant'])){
+    $_SESSION['klant_opdrachten'] = $klant_id = $_GET['klant'];
+} else $klant_id = $_SESSION['klant_opdrachten'] ?? null;
+$klant_sql_where = isset($klant_id) ? "WHERE klant_id=$klant_id" : "";
+
 // ophalen klantgegevens uit database
 $query="SELECT id, datumopdr, klant_id, colli, kg, 
         CONCAT(straat,' ', huisnummer, COALESCE(toevoeging, '')) as adres,
         postcode, plaats, datumplanning, datumtransport, bonbin, mdw, bedrag, notitie
         FROM opdracht
+        $klant_sql_where
         ORDER BY datumopdr DESC, postcode
         LIMIT " .$start_from.",". RECORDS_PER_PAGE.";";
 //$resultaat bepalen....
