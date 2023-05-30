@@ -66,7 +66,8 @@ if ($aantal>0){ //controle of er wel wat opgehaald wordt...
                             <td>
                                 <a href='klant_edit.php?id={$row['id']}' class='btn-edit'><i class='material-icons md-24'>edit</i></a>
                                 <a href='klant_delete.php?id={$row['id']}' class='btn-delete'><i class='material-icons md-24'>delete</i></a>
-                                <a href='orders.php?klant={$row['id']}' class='btn-order'><i class='material-icons md-24'>orders</i></a>
+                                <a href='orders.php?klant={$row['id']}&past=0' class='btn-order'><i class='material-icons md-24'>local_shipping</i></a>
+                                <a href='orders.php?klant={$row['id']}&past=1' class='btn-order-past'><i class='material-icons md-24'>no_crash</i></a>
                             </td>
                         </tr>";
     }

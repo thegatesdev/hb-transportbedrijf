@@ -218,7 +218,9 @@ input[type=submit]:hover {
 }
 .btn-order{
     color: blue;
-    background: blue; /* Icons wilden niet werken */
+}
+.btn-order-past{
+    color: blue;
 }
 /*Idem als login form, maar nu voor detail-forms...*/
 #frmDetail > * {

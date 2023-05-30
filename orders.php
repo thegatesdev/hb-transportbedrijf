@@ -45,14 +45,22 @@ $total_pages = ceil($total_rows / RECORDS_PER_PAGE);
 if (isset($_GET['klant'])){
     $_SESSION['klant_opdrachten'] = $klant_id = $_GET['klant'];
 } else $klant_id = $_SESSION['klant_opdrachten'] ?? null;
-$klant_sql_where = isset($klant_id) ? "WHERE klant_id=$klant_id" : "";
+$klant_sql_where = isset($klant_id) ? "klant_id=$klant_id" : "";
+
+//bepalen eerdere orders
+if (isset($_GET['past'])){
+    $_SESSION['past_orders'] = $past_orders = $_GET['past'] == 1;
+} else $past_orders = $_SESSION['past_orders'] ?? false;
+$date_sql_where = $past_orders ? "datumopdr < CURDATE()" : "datumopdr >= CURDATE()";
 
 // ophalen klantgegevens uit database
 $query="SELECT id, datumopdr, klant_id, colli, kg, 
         CONCAT(straat,' ', huisnummer, COALESCE(toevoeging, '')) as adres,
         postcode, plaats, datumplanning, datumtransport, bonbin, mdw, bedrag, notitie
         FROM opdracht
-        $klant_sql_where
+        WHERE
+        $klant_sql_where AND
+        $date_sql_where
         ORDER BY datumopdr DESC, postcode
         LIMIT " .$start_from.",". RECORDS_PER_PAGE.";";
 //$resultaat bepalen....
