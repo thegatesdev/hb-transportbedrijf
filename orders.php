@@ -34,18 +34,12 @@ $page = $_GET["page"] ?? 1;
 
 //start vanaf
 $start_from = ($page-1) * RECORDS_PER_PAGE;
-//aantal pagina's bepalen t.b.v. paginering
-$sql_count = "SELECT count(id) as aantal FROM Klant;";
-$res_count = mysqli_query($dbconn, $sql_count);
-$row = mysqli_fetch_assoc($res_count);
-$total_rows = $row['aantal'];
-$total_pages = ceil($total_rows / RECORDS_PER_PAGE);
 
 //bepalen orders per klant
 if (isset($_GET['klant'])){
     $_SESSION['klant_opdrachten'] = $klant_id = $_GET['klant'];
 } else $klant_id = $_SESSION['klant_opdrachten'] ?? null;
-$klant_sql_where = isset($klant_id) ? "klant_id=$klant_id" : "";
+$klant_sql_where = isset($klant_id) ? "klant_id=$klant_id AND" : "";
 
 //bepalen eerdere orders
 if (isset($_GET['past'])){
@@ -53,23 +47,27 @@ if (isset($_GET['past'])){
 } else $past_orders = $_SESSION['past_orders'] ?? false;
 $date_sql_where = $past_orders ? "datumopdr < CURDATE()" : "datumopdr >= CURDATE()";
 
+//aantal pagina's bepalen t.b.v. paginering
+$total_rows = mysqli_num_rows(mysqli_query($dbconn, "SELECT 1 FROM opdracht WHERE $klant_sql_where $date_sql_where"));
+$total_pages = ceil($total_rows / RECORDS_PER_PAGE);
+
 // ophalen klantgegevens uit database
 $query="SELECT id, datumopdr, klant_id, colli, kg, 
         CONCAT(straat,' ', huisnummer, COALESCE(toevoeging, '')) as adres,
         postcode, plaats, datumplanning, datumtransport, bonbin, mdw, bedrag, notitie
         FROM opdracht
         WHERE
-        $klant_sql_where AND
+        $klant_sql_where
         $date_sql_where
         ORDER BY datumopdr DESC, postcode
         LIMIT " .$start_from.",". RECORDS_PER_PAGE.";";
+
 //$resultaat bepalen....
 $result=mysqli_query($dbconn, $query);
-//aantal records bepalen....
-$aantal=mysqli_num_rows($result);
 $contentTable="";
+
 // tabel aanvullen met klantgegevens
-if ($aantal>0){ //controle of er wel wat opgehaald wordt...
+if ($total_rows>0){ //controle of er wel wat opgehaald wordt...
     while ($row=mysqli_fetch_array($result)) {
         $contentTable.="<tr>
                             <td>".$row['datumopdr']."</td>                       
