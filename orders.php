@@ -85,7 +85,6 @@ if ($total_rows>0){ //controle of er wel wat opgehaald wordt...
                             <td>".$row['notitie']."</td>
                             <td>
                                 <a href='order_edit.php?id={$row['id']}' class='btn-edit'><i class='material-icons md-24'>edit</i></a>
-                                <a href='order_delete.php?id={$row['id']}' class='btn-delete'><i class='material-icons md-24'>delete</i></a>
                             </td>
                         </tr>";
     }

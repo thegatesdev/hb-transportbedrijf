@@ -22,6 +22,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         case "InsertOpdracht":
             insertOpdracht();
             break;
+        case "UpdateOpdracht":
+            UpdateOpdracht();
+            break;
         case "LEEG":
         default:
             echo "geen geldige actie...";
@@ -113,6 +116,43 @@ else {
         else {
             echo "<p>Opdracht is NIET toegevoegd...</p><br>";
             header('refresh: 10; url=klanten.php');
+            exit();
+        }
+    }
+
+    function UpdateOpdracht(){
+        global $dbconn;
+        $date = date("Y-m-d");
+        $opdrnr = getPostOr('opdrnr');
+        $klantid = getPostOr('klant_id');
+        $colli = getPostOr('colli');
+        $kg = getPostOr('kg');
+        $straat = getPostOr('straat');
+        $postcode = getPostOr('postcode');
+        $plaats = getPostOr('plaats');
+        $datumplanning = getPostOr('datumplanning');
+        $datumtransport = getPostOr('datumtransport');
+        $bonbin = getPostOr('bonbin');
+        $mdw = getPostOr('mdw');
+        $bedrag = getPostOr('bedrag');
+        $notitie = getPostOr('notitie');
+
+        $qryUpdateOpdr = "UPDATE opdracht SET
+        klant_id='$klantid', colli='$colli', kg='$kg', straat='$straat', postcode='$postcode',
+        plaats='$plaats', datumplanning='$datumplanning', datumtransport='$datumtransport',
+        bonbin='$bonbin', mdw='$mdw', bedrag='$bedrag', notitie='$notitie'
+        WHERE id=$opdrnr";
+
+        echo $qryUpdateOpdr;
+
+        if (mysqli_query($dbconn, $qryUpdateOpdr)) {
+            echo "<p>Opdracht $opdrnr is aangepast</p><br>";
+            header('refresh: 1; url=orders.php');
+            exit();
+        }
+        else {
+            echo "<p>Opdracht $opdrnr is NIET aangepast</p><br>";
+            header('refresh: 10; url=orders.php');
             exit();
         }
     }
